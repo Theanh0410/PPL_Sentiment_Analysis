@@ -1,5 +1,3 @@
-from CompiledFiles.SentimentLexer import SentimentLexer
-from CompiledFiles.SentimentParser import SentimentParser
 import sys, os
 import subprocess
 import unittest
@@ -82,6 +80,8 @@ def runTest():
 
 class Sentiment:
     def sentiment(self, text):
+        from CompiledFiles.SentimentLexer import SentimentLexer
+        from CompiledFiles.SentimentParser import SentimentParser
 
         parser = SentimentParser(CommonTokenStream(SentimentLexer(InputStream(text))))
 
@@ -124,4 +124,3 @@ def main(argv):
 
 if __name__ == '__main__':
     main(sys.argv[1:])     
-    
