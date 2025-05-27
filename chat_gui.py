@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import scrolledtext
-from run import Sentiment
+from run_copy import Sentiment
 
 class ChatApp:
     def __init__(self, root):
@@ -33,8 +33,7 @@ class ChatApp:
         self.entry.pack(side='left', fill='x', expand=True, padx=10, pady=10)
         self.entry.bind("<Return>", self.send_message)
 
-        self.send_button = tk.Button(root, text="Send", bg="#075E54", fg="white",
-                                     font=("Arial", 12, "bold"), command=self.send_message)
+        self.send_button = tk.Button(root, text="Send", bg="#075E54", fg="white", font=("Arial", 12, "bold"), command=self.send_message)
         self.send_button.pack(side='right', padx=5, pady=10)
 
         self.bot = Sentiment()
