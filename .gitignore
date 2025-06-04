@@ -4,3 +4,22 @@ __pycache__/
 .antlr/
 
 CompiledFiles/
+.antlr/Sentiment.interp
+.antlr/Sentiment.tokens
+.antlr/SentimentLexer.interp
+.antlr/SentimentLexer.java
+.antlr/SentimentLexer.tokens
+.antlr/SentimentParser.java
+__pycache__/ASTGeneration.cpython-312.pyc
+__pycache__/ASTUtils.cpython-312.pyc
+__pycache__/CodeRunner.cpython-312.pyc
+CompiledFiles/__pycache__/SentimentLexer.cpython-312.pyc
+CompiledFiles/__pycache__/SentimentParser.cpython-312.pyc
+CompiledFiles/__pycache__/SentimentVisitor.cpython-312.pyc
+CompiledFiles/Sentiment.interp
+CompiledFiles/Sentiment.tokens
+CompiledFiles/SentimentLexer.interp
+CompiledFiles/SentimentLexer.py
+CompiledFiles/SentimentLexer.tokens
+CompiledFiles/SentimentParser.py
+CompiledFiles/SentimentVisitor.py

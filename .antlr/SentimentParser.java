@@ -19,7 +19,7 @@ public class SentimentParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
-		STRING=25, WS=26;
+		T__24=25, T__25=26, T__26=27, T__27=28, STRING=29, WS=30;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_statement1 = 2, RULE_subject = 3, 
 		RULE_verb = 4, RULE_neu_v = 5, RULE_pos_v = 6, RULE_neg_v = 7, RULE_obj = 8, 
@@ -38,8 +38,9 @@ public class SentimentParser extends Parser {
 		return new String[] {
 			null, "'i'", "'you'", "'we'", "'understand'", "'know'", "'recognize'", 
 			"'like'", "'love'", "'enjoy'", "'hate'", "'dislike'", "'despise'", "'average'", 
-			"'normal'", "'mediocre'", "'good'", "'amazing'", "'excellent'", "'wonderful'", 
-			"'fantastic'", "'bad'", "'horrible'", "'boring'", "'terrible'"
+			"'normal'", "'mediocre'", "'fine'", "'okay'", "'good'", "'amazing'", 
+			"'excellent'", "'wonderful'", "'fantastic'", "'great'", "'beautiful'", 
+			"'bad'", "'horrible'", "'boring'", "'terrible'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -47,7 +48,7 @@ public class SentimentParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, "STRING", "WS"
+			null, null, null, null, null, "STRING", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -184,6 +185,10 @@ public class SentimentParser extends Parser {
 			case T__21:
 			case T__22:
 			case T__23:
+			case T__24:
+			case T__25:
+			case T__26:
+			case T__27:
 			case STRING:
 				enterOuterAlt(_localctx, 2);
 				{
@@ -631,27 +636,31 @@ public class SentimentParser extends Parser {
 			case T__12:
 			case T__13:
 			case T__14:
+			case T__15:
+			case T__16:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(70);
 				neu_ph();
 				}
 				break;
-			case T__15:
-			case T__16:
 			case T__17:
 			case T__18:
 			case T__19:
+			case T__20:
+			case T__21:
+			case T__22:
+			case T__23:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(71);
 				pos_ph();
 				}
 				break;
-			case T__20:
-			case T__21:
-			case T__22:
-			case T__23:
+			case T__24:
+			case T__25:
+			case T__26:
+			case T__27:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(72);
@@ -690,7 +699,7 @@ public class SentimentParser extends Parser {
 			{
 			setState(75);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 57344L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 253952L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -728,7 +737,7 @@ public class SentimentParser extends Parser {
 			{
 			setState(77);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 2031616L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 33292288L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -766,7 +775,7 @@ public class SentimentParser extends Parser {
 			{
 			setState(79);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 31457280L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 503316480L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -788,7 +797,7 @@ public class SentimentParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u001aR\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u001eR\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -802,8 +811,8 @@ public class SentimentParser extends Parser {
 		"\f\u0001\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000e\u0000\u0000"+
 		"\u000f\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018"+
 		"\u001a\u001c\u0000\u0007\u0001\u0000\u0001\u0003\u0001\u0000\u0004\u0006"+
-		"\u0001\u0000\u0007\t\u0001\u0000\n\f\u0001\u0000\r\u000f\u0001\u0000\u0010"+
-		"\u0014\u0001\u0000\u0015\u0018J\u0000\u001e\u0001\u0000\u0000\u0000\u0002"+
+		"\u0001\u0000\u0007\t\u0001\u0000\n\f\u0001\u0000\r\u0011\u0001\u0000\u0012"+
+		"\u0018\u0001\u0000\u0019\u001cJ\u0000\u001e\u0001\u0000\u0000\u0000\u0002"+
 		"\"\u0001\u0000\u0000\u0000\u0004%\u0001\u0000\u0000\u0000\u0006*\u0001"+
 		"\u0000\u0000\u0000\b/\u0001\u0000\u0000\u0000\n1\u0001\u0000\u0000\u0000"+
 		"\f3\u0001\u0000\u0000\u0000\u000e5\u0001\u0000\u0000\u0000\u0010:\u0001"+
@@ -820,11 +829,11 @@ public class SentimentParser extends Parser {
 		"/,\u0001\u0000\u0000\u0000/-\u0001\u0000\u0000\u0000/.\u0001\u0000\u0000"+
 		"\u00000\t\u0001\u0000\u0000\u000012\u0007\u0001\u0000\u00002\u000b\u0001"+
 		"\u0000\u0000\u000034\u0007\u0002\u0000\u00004\r\u0001\u0000\u0000\u0000"+
-		"56\u0007\u0003\u0000\u00006\u000f\u0001\u0000\u0000\u000079\u0005\u0019"+
+		"56\u0007\u0003\u0000\u00006\u000f\u0001\u0000\u0000\u000079\u0005\u001d"+
 		"\u0000\u000087\u0001\u0000\u0000\u00009<\u0001\u0000\u0000\u0000:8\u0001"+
 		"\u0000\u0000\u0000:;\u0001\u0000\u0000\u0000;\u0011\u0001\u0000\u0000"+
 		"\u0000<:\u0001\u0000\u0000\u0000=>\u0003\u0014\n\u0000>?\u0003\u0016\u000b"+
-		"\u0000?\u0013\u0001\u0000\u0000\u0000@B\u0005\u0019\u0000\u0000A@\u0001"+
+		"\u0000?\u0013\u0001\u0000\u0000\u0000@B\u0005\u001d\u0000\u0000A@\u0001"+
 		"\u0000\u0000\u0000BE\u0001\u0000\u0000\u0000CA\u0001\u0000\u0000\u0000"+
 		"CD\u0001\u0000\u0000\u0000D\u0015\u0001\u0000\u0000\u0000EC\u0001\u0000"+
 		"\u0000\u0000FJ\u0003\u0018\f\u0000GJ\u0003\u001a\r\u0000HJ\u0003\u001c"+

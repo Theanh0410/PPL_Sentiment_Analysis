@@ -87,7 +87,7 @@ class ChatApp:
 
         self.add_message(user_text, sender="user")
         sentiment = self.bot.sentiment(user_text)
-        self.add_message(f"that feel {sentiment}", sender="bot")
+        self.add_message(f"That feels {sentiment}", sender="bot")
 
     def add_message(self, text, sender):
         bubble = tk.Label(self.messages_frame, text=text, font=("Arial", 16), wraplength=200, justify='left', padx=10, pady=5)

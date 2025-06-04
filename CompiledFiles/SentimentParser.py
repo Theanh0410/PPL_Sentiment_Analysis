@@ -11,7 +11,7 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 ")
         buf.write("T\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16\t")
         buf.write("\16\4\17\t\17\4\20\t\20\3\2\3\2\3\3\3\3\5\3%\n\3\3\4\5")
@@ -20,7 +20,7 @@ def serializedATN():
         buf.write("\3\13\3\13\3\f\7\fD\n\f\f\f\16\fG\13\f\3\r\3\r\3\r\5\r")
         buf.write("L\n\r\3\16\3\16\3\17\3\17\3\20\3\20\3\20\2\2\21\2\4\6")
         buf.write("\b\n\f\16\20\22\24\26\30\32\34\36\2\t\3\2\3\5\3\2\6\b")
-        buf.write("\3\2\t\13\3\2\f\16\3\2\17\21\3\2\22\26\3\2\27\32\2L\2")
+        buf.write("\3\2\t\13\3\2\f\16\3\2\17\23\3\2\24\32\3\2\33\36\2L\2")
         buf.write(" \3\2\2\2\4$\3\2\2\2\6\'\3\2\2\2\b,\3\2\2\2\n\61\3\2\2")
         buf.write("\2\f\63\3\2\2\2\16\65\3\2\2\2\20\67\3\2\2\2\22<\3\2\2")
         buf.write("\2\24?\3\2\2\2\26E\3\2\2\2\30K\3\2\2\2\32M\3\2\2\2\34")
@@ -30,9 +30,9 @@ def serializedATN():
         buf.write("+\7\3\2\2\2,-\t\2\2\2-\t\3\2\2\2.\62\5\f\7\2/\62\5\16")
         buf.write("\b\2\60\62\5\20\t\2\61.\3\2\2\2\61/\3\2\2\2\61\60\3\2")
         buf.write("\2\2\62\13\3\2\2\2\63\64\t\3\2\2\64\r\3\2\2\2\65\66\t")
-        buf.write("\4\2\2\66\17\3\2\2\2\678\t\5\2\28\21\3\2\2\29;\7\33\2")
+        buf.write("\4\2\2\66\17\3\2\2\2\678\t\5\2\28\21\3\2\2\29;\7\37\2")
         buf.write("\2:9\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\23\3\2\2\2")
-        buf.write("><\3\2\2\2?@\5\26\f\2@A\5\30\r\2A\25\3\2\2\2BD\7\33\2")
+        buf.write("><\3\2\2\2?@\5\26\f\2@A\5\30\r\2A\25\3\2\2\2BD\7\37\2")
         buf.write("\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2F\27\3\2\2\2")
         buf.write("GE\3\2\2\2HL\5\32\16\2IL\5\34\17\2JL\5\36\20\2KH\3\2\2")
         buf.write("\2KI\3\2\2\2KJ\3\2\2\2L\31\3\2\2\2MN\t\6\2\2N\33\3\2\2")
@@ -54,11 +54,12 @@ class SentimentParser ( Parser ):
     literalNames = [ "<INVALID>", "'i'", "'you'", "'we'", "'understand'", 
                      "'know'", "'recognize'", "'like'", "'love'", "'enjoy'", 
                      "'hate'", "'dislike'", "'despise'", "'average'", "'normal'", 
-                     "'mediocre'", "'good'", "'amazing'", "'excellent'", 
-                     "'wonderful'", "'fantastic'", "'bad'", "'horrible'", 
-                     "'boring'", "'terrible'" ]
+                     "'mediocre'", "'fine'", "'okay'", "'good'", "'amazing'", 
+                     "'excellent'", "'wonderful'", "'fantastic'", "'great'", 
+                     "'beautiful'", "'bad'", "'horrible'", "'boring'", "'terrible'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -111,8 +112,12 @@ class SentimentParser ( Parser ):
     T__21=22
     T__22=23
     T__23=24
-    STRING=25
-    WS=26
+    T__24=25
+    T__25=26
+    T__26=27
+    T__27=28
+    STRING=29
+    WS=30
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -203,7 +208,7 @@ class SentimentParser ( Parser ):
                 self.state = 32
                 self.statement1()
                 pass
-            elif token in [SentimentParser.T__12, SentimentParser.T__13, SentimentParser.T__14, SentimentParser.T__15, SentimentParser.T__16, SentimentParser.T__17, SentimentParser.T__18, SentimentParser.T__19, SentimentParser.T__20, SentimentParser.T__21, SentimentParser.T__22, SentimentParser.T__23, SentimentParser.STRING]:
+            elif token in [SentimentParser.T__12, SentimentParser.T__13, SentimentParser.T__14, SentimentParser.T__15, SentimentParser.T__16, SentimentParser.T__17, SentimentParser.T__18, SentimentParser.T__19, SentimentParser.T__20, SentimentParser.T__21, SentimentParser.T__22, SentimentParser.T__23, SentimentParser.T__24, SentimentParser.T__25, SentimentParser.T__26, SentimentParser.T__27, SentimentParser.STRING]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 33
                 self.statement2()
@@ -704,17 +709,17 @@ class SentimentParser ( Parser ):
             self.state = 73
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [SentimentParser.T__12, SentimentParser.T__13, SentimentParser.T__14]:
+            if token in [SentimentParser.T__12, SentimentParser.T__13, SentimentParser.T__14, SentimentParser.T__15, SentimentParser.T__16]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 70
                 self.neu_ph()
                 pass
-            elif token in [SentimentParser.T__15, SentimentParser.T__16, SentimentParser.T__17, SentimentParser.T__18, SentimentParser.T__19]:
+            elif token in [SentimentParser.T__17, SentimentParser.T__18, SentimentParser.T__19, SentimentParser.T__20, SentimentParser.T__21, SentimentParser.T__22, SentimentParser.T__23]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 71
                 self.pos_ph()
                 pass
-            elif token in [SentimentParser.T__20, SentimentParser.T__21, SentimentParser.T__22, SentimentParser.T__23]:
+            elif token in [SentimentParser.T__24, SentimentParser.T__25, SentimentParser.T__26, SentimentParser.T__27]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 72
                 self.neg_ph()
@@ -760,7 +765,7 @@ class SentimentParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 75
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SentimentParser.T__12) | (1 << SentimentParser.T__13) | (1 << SentimentParser.T__14))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SentimentParser.T__12) | (1 << SentimentParser.T__13) | (1 << SentimentParser.T__14) | (1 << SentimentParser.T__15) | (1 << SentimentParser.T__16))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -803,7 +808,7 @@ class SentimentParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 77
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SentimentParser.T__15) | (1 << SentimentParser.T__16) | (1 << SentimentParser.T__17) | (1 << SentimentParser.T__18) | (1 << SentimentParser.T__19))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SentimentParser.T__17) | (1 << SentimentParser.T__18) | (1 << SentimentParser.T__19) | (1 << SentimentParser.T__20) | (1 << SentimentParser.T__21) | (1 << SentimentParser.T__22) | (1 << SentimentParser.T__23))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -846,7 +851,7 @@ class SentimentParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 79
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SentimentParser.T__20) | (1 << SentimentParser.T__21) | (1 << SentimentParser.T__22) | (1 << SentimentParser.T__23))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SentimentParser.T__24) | (1 << SentimentParser.T__25) | (1 << SentimentParser.T__26) | (1 << SentimentParser.T__27))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

@@ -24,8 +24,8 @@ noun: STRING*;
 
 description_phrase: neu_ph | pos_ph | neg_ph;
 
-neu_ph: 'average' | 'normal' | 'mediocre';
-pos_ph: 'good' | 'amazing' | 'excellent' | 'wonderful' | 'fantastic';
+neu_ph: 'average' | 'normal' | 'mediocre' | 'fine' | 'okay';
+pos_ph: 'good' | 'amazing' | 'excellent' | 'wonderful' | 'fantastic' | 'great' | 'beautiful';
 neg_ph: 'bad' | 'horrible' | 'boring' | 'terrible';
 
 // Lexer 
