@@ -1,82 +1,34 @@
 grammar Sentiment;
 
-// Ngữ pháp chỉ xử lý câu đơn, hiện tại đơn, chưa xử lý được các ngữ pháp phức tạp hơn
 program: statement;
 
-statement
-    : statement1 // Cảm nhận của người dùng, e.g: I like this product.
-    | statement2 // Bản chất sản phẩm, dịch vụ, e.g: The product is amazing.
-    ;
+statement: statement1 | statement2 ;
 
-statement1
-    : (subj)? verb obj
-    ;
+statement1  : (subject)? verb obj ;
 
+subject     : 'i' | 'you' | 'we' ;
 
-subj
-    : 'i' | 'you' | 'we'
-    ;
+verb: neu_v | pos_v | neg_v;
 
-verb
-    : neu_v | pos_v | neg_v
-    ;
+neu_v: 'understand' | 'know' | 'recognize';
 
-neu_v
-    : 'understand' | 'know' | 'recognize'
-    ;
+pos_v: 'like' | 'love' | 'enjoy';
 
-pos_v
-    : 'like' | 'love' | 'enjoy' | 'good'
-    ;
+neg_v: 'hate' | 'dislike' | 'despise';
 
-neg_v
-    : 'hate' | 'dislike' | 'despise'
-    ;
+obj: STRING*;
 
-article
-    : 'the' | 'an' | 'a'
-    ;
+statement2: noun description_phrase;
 
-pronoun
-    : 'this' | 'that' | 'there' | 'those' 
-    ;
+noun: STRING*;
 
-obj
-    : (article)? (pronoun | STRING)+
-    ;
+description_phrase: neu_ph | pos_ph | neg_ph;
 
-statement2
-    : noun state_verb description_phrase
-    ;
+neu_ph: 'average' | 'normal' | 'mediocre';
+pos_ph: 'good' | 'amazing' | 'excellent' | 'wonderful' | 'fantastic';
+neg_ph: 'bad' | 'horrible' | 'boring' | 'terrible';
 
-noun
-    : (article | pronoun)? STRING
-    ;
+// Lexer 
+STRING : [a-zA-Z]+ ;
+WS : [ \t\r\n]+ -> skip ;
 
-
-state_verb
-    : 'is' | 'are' | 'seems' | 'look' | 'feels' | 'seem' | 'feel' | 'looks'
-    ;
-
-description_phrase
-    : (neu_ph | pos_ph | neg_ph)
-    ;
-
-neu_ph
-    : 'average' | 'normal' | 'mediocre'
-    ;
-
-pos_ph
-    : 'good' | 'amazing' | 'excellent' | 'wonderful' | 'fantastic'
-    ;
-
-neg_ph
-    : 'bad' | 'horrible' | 'boring' | 'terrible'
-    ;
-
-//Token
-STRING
-    : [a-zA-Z]+
-    ;
-
-WS : [ \t\r\n]+ -> skip;
