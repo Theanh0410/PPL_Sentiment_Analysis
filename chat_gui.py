@@ -1,6 +1,44 @@
 import tkinter as tk
 from tkinter import scrolledtext
-from run_copy import Sentiment
+from run import Sentiment
+
+def launch_chat_window(root):
+    # Destroy all widgets in root window (welcome screen)
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Launch chat in the same root window
+    ChatApp(root)
+
+class MainApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sentiment Analyzer")
+        self.root.geometry("450x400")
+        self.root.configure(bg="#FFD1D1")
+
+        # Emojis    
+        emoji_frame = tk.Frame(root, bg="#FFD1D1")
+        emoji_frame.pack(pady=50)
+
+        self.happy_img = tk.PhotoImage(file="Images/happy.png").subsample(8, 8)
+        self.neutral_img = tk.PhotoImage(file="Images/neutral.png").subsample(7, 7)
+        self.sad_img = tk.PhotoImage(file="Images/sad.png").subsample(8, 8)
+
+        tk.Label(emoji_frame, image=self.happy_img, bg="#FFD1D1").pack(side="left", padx=20)
+        tk.Label(emoji_frame, image=self.neutral_img, bg="#FFD1D1").pack(side="left", padx=20)
+        tk.Label(emoji_frame, image=self.sad_img, bg="#FFD1D1").pack(side="left", padx=20)
+
+
+        # Title
+        tk.Label(root, text="Sentiment  Analysis", font=("Arial", 24, "bold"), bg="#FFD1D1").pack(pady=10)
+
+        # Analyze Button
+        tk.Button(root, text="Analyze", font=("Arial", 14, "bold"), bg="#5D5FEF", fg="white", padx=20, pady=10, command=self.go_to_chat).pack(pady=30)
+
+    def go_to_chat(self):
+        launch_chat_window(self.root)
+
 
 class ChatApp:
     def __init__(self, root):
@@ -69,6 +107,5 @@ class ChatApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("450x500")
-    app = ChatApp(root)
+    app = MainApp(root)
     root.mainloop()

@@ -2,33 +2,39 @@ import sys, os
 import subprocess
 import unittest
 from antlr4 import *
+from TextCleaner import clean_text
 
 # Define your variables
 DIR = os.path.dirname(__file__)
-ANTLR_JAR = 'C:/antlr/antlr4-4.9.2-complete.jar' #Remember to change it according to ur computer
+ANTLR_JAR = 'C:/antlr/antlr4-4.9.2-complete.jar' # your location is going here
 CPL_Dest = 'CompiledFiles'
 SRC = 'Sentiment.g4'
 TESTS = os.path.join(DIR, './tests')
 
-
 def printUsage():
     print('python run.py gen')
     print('python run.py test')
-    print('python run.py chat')    
-
+    print('python run.py chat')
 
 def printBreak():
     print('-----------------------------------------------')
 
-
 def generateAntlr2Python():
     print('Antlr4 is running...')
-    subprocess.run(['java', '-jar', ANTLR_JAR, '-o', CPL_Dest, '-no-listener', '-Dlanguage=Python3', SRC])
+    subprocess.run(['java', '-jar', ANTLR_JAR, '-o', CPL_Dest, '-no-listener', '-visitor', '-Dlanguage=Python3', SRC])    
     print('Generate successfully')
+
+def runCode(astTree):    
+    from CodeRunner import CodeRunner
+    code_runner = CodeRunner()
+    result = astTree.accept(code_runner)
+    
+    print("Result:", result)
+
 
 def runTest():
     print('Running testcases...')
-    
+       
     from CompiledFiles.SentimentLexer import SentimentLexer
     from CompiledFiles.SentimentParser import SentimentParser
     from antlr4.error.ErrorListener import ErrorListener
@@ -37,72 +43,74 @@ def runTest():
         def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
             print(f"Input rejected: {msg}")
             exit(1)  # Exit the program with an error
-    filename = '001.txt'
-    inputFile = os.path.join(DIR, './tests', filename)    
 
-    print('List of token: ')
-    lexer = SentimentLexer(FileStream(inputFile))        
-    tokens = []
-    token = lexer.nextToken()
-    while token.type != Token.EOF:
-        tokens.append(token.text)
-        token = lexer.nextToken()
-    tokens.append('<EOF>')
-    print(','.join(tokens))    
+    filename = 'testcase.txt'
+    inputFile = os.path.join(DIR, './tests', filename)        
 
-    # test
-    input_stream = FileStream(inputFile)
+    with open(inputFile, 'r', encoding='utf-8') as f:
+        raw_text = f.read()
+    cleaned_tokens = clean_text(raw_text)
+    print("Cleaned tokens:", cleaned_tokens)
+
+    # Parse the cleaned text instead of the raw file
+    input_stream = InputStream(" ".join(cleaned_tokens))
     lexer = SentimentLexer(input_stream)
     stream = CommonTokenStream(lexer)
-    parser = SentimentParser(stream)
-    tree = parser.program()  # Start parsing at the `program` rule
-
-    # Print the parse tree (for debugging)
-    print(tree.toStringTree(recog=parser))
-    # end of test
-
-    
-    # Reset the input stream for parsing and catch the error
-    lexer = SentimentLexer(FileStream(inputFile))
-    token_stream = CommonTokenStream(lexer)
-
-    parser = SentimentParser(token_stream)   
+    parser = SentimentParser(stream)   
     parser.removeErrorListeners()
     parser.addErrorListener(CustomErrorListener())    
+
     try:
-        parser.program()
+        tree = parser.program()
         print("Input accepted")
     except SystemExit:        
-        pass
-    
+        return
+
     printBreak()
     print('Run tests completely')
+
+    from ASTGeneration import ASTGeneration
+    ast_generator = ASTGeneration()
+    asttree = tree.accept(ast_generator)
+    print('This is ast string: ', asttree)
+
+    runCode(asttree)
 
 class Sentiment:
     def sentiment(self, text):
         from CompiledFiles.SentimentLexer import SentimentLexer
         from CompiledFiles.SentimentParser import SentimentParser
+        from ASTGeneration import ASTGeneration
+        from CodeRunner import CodeRunner
+        from TextCleaner import clean_text
 
-        parser = SentimentParser(CommonTokenStream(SentimentLexer(InputStream(text))))
+        # Clean and prepare text
+        cleaned_tokens = clean_text(text)
+        input_stream = InputStream(" ".join(cleaned_tokens))
+
+        # ANTLR parsing
+        lexer = SentimentLexer(input_stream)
+        token_stream = CommonTokenStream(lexer)
+        parser = SentimentParser(token_stream)
 
         try:
             tree = parser.program()
-            result = tree.toStringTree(recog=parser)
-            
-            if 'pos_v' in result.lower():
-                return "positive"
-            elif 'neg_v' in result.lower():
-                return "negative"
-            else:
-                return "neutral"
+            ast = tree.accept(ASTGeneration())
+            result = ast.accept(CodeRunner())
+            return result.get("sentiment", "unknown")
         except Exception as e:
             return f"Error parsing input: {e}"
 
     def chat(self):
+        print("Enter a sentence (or type 'exit' to quit):")
         while True:
             user_input = input("Input: ")
+            if user_input.lower() in ['exit', 'quit']:
+                print("Goodbye!")
+                break
             sentiment = self.sentiment(user_input)
-            print("AI: that feel", sentiment)
+            print("AI: that feels", sentiment)
+
 
 def main(argv):
     print('Complete jar file ANTLR  :  ' + str(ANTLR_JAR))
@@ -121,6 +129,9 @@ def main(argv):
     else:
         printUsage()
 
-
 if __name__ == '__main__':
-    main(sys.argv[1:])     
+    main(sys.argv[1:])
+
+    
+    
+    
